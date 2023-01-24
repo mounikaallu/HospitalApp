@@ -21,7 +21,7 @@ public class Doctor {
 
 	@Column(name = "doctor_name")
 	private String name;
-	private int contactNo;
+	private String contactNo;
 	@Enumerated(EnumType.STRING)
 	private Specialization specialization;
 
@@ -49,11 +49,11 @@ public class Doctor {
 		this.name = name;
 	}
 
-	public int getContactNo() {
+	public String getContactNo() {
 		return contactNo;
 	}
 
-	public void setContactNo(int contactNo) {
+	public void setContactNo(String contactNo) {
 		this.contactNo = contactNo;
 	}
 
