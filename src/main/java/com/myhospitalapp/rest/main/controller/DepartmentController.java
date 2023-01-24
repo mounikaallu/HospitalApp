@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.myhospitalapp.rest.main.model.Department;
+import com.myhospitalapp.rest.main.model.HospitalStaff;
 import com.myhospitalapp.rest.main.service.DepartmentService;
 
 @RestController
@@ -22,7 +23,11 @@ import com.myhospitalapp.rest.main.service.DepartmentService;
 public class DepartmentController {
 	@Autowired
 	private DepartmentService departmentService;
-	
+	@PostMapping("/add")
+	public ResponseEntity<String> postHospitalStaff(@RequestBody Department department){
+		departmentService.insertDepartment(department);
+		return ResponseEntity.status(HttpStatus.OK).body("Department added in DB");
+	}
 
 	@GetMapping("/getall")
 	public List<Department> getAllDepartment() {
@@ -49,7 +54,4 @@ return list;
 		
 	}
 	
-	
-	
-
 }
