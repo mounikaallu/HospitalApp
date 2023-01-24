@@ -19,5 +19,21 @@ public class Department {
 	private int id;
 	@Enumerated(EnumType.STRING)
 	private Specialization specialization;
+	public int getId() {
+		return id;
+	}
+	@Override
+	public String toString() {
+		return "Department [id=" + id + ", specialization=" + specialization + "]";
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public Specialization getSpecialization() {
+		return specialization;
+	}
+	public void setSpecialization(Specialization specialization) {
+		this.specialization = specialization;
+	}
 
 }
