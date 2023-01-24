@@ -16,6 +16,14 @@ public class PatientAdmit {
 	public void setId(int id) {
 		this.id = id;
 	}
+	private int bedNo;
+	
+	public int getBedNo() {
+		return bedNo;
+	}
+	public void setBedNo(int bedNo) {
+		this.bedNo = bedNo;
+	}
 	@OneToOne
     private Patient patient;
     @OneToOne

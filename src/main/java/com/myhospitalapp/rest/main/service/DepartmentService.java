@@ -9,11 +9,14 @@ import org.springframework.stereotype.Service;
 import com.myhospitalapp.rest.main.model.Department;
 import com.myhospitalapp.rest.main.repository.DepartmentRepository;
 @Service
-
 public class DepartmentService {
 	@Autowired
 	private DepartmentRepository departmentRepository;
 
+	public void insertDepartment(Department department) {
+		departmentRepository.save(department);
+		
+	}
 	
 
 	
@@ -35,5 +38,7 @@ public class DepartmentService {
 		
 	
 	}
+
+	
 
 }
