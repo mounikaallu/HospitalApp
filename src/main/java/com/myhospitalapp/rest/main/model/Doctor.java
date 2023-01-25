@@ -22,6 +22,7 @@ public class Doctor {
 	@ManyToOne
 	private Department department;
 
+
 	public Department getDepartment() {
 		return department;
 	}
@@ -30,8 +31,10 @@ public class Doctor {
 		this.department = department;
 	}
 
-	@Column(name="doctor_name")
-	private String name; 
+	
+	@Column(name = "doctor_name")
+	private String name;
+
 	private String contactNo;
 	@Enumerated(EnumType.STRING)
 	private Specialization specialization;
@@ -51,6 +54,7 @@ public class Doctor {
 	public void setName(String name) {
 		this.name = name;
 	}
+
 
 	public String getContactNo() {
 		return contactNo;
