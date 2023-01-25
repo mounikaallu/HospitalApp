@@ -1,5 +1,8 @@
 package com.myhospitalapp.rest.main.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,4 +18,24 @@ public class PatientAdmitService {
     public void insert(PatientAdmit patientAdmit) {
     	patientAdmitRepository.save(patientAdmit);
     }
+
+	public List<PatientAdmit> getAllPatientAdmit() {
+		
+		return patientAdmitRepository.findAll();
+	}
+
+	public Optional<PatientAdmit> getPatientAdmitById(int id) {
+		Optional<PatientAdmit> optional=patientAdmitRepository.findById(id);
+		return optional;
+	}
+
+	public void updatePatientAdmitById(PatientAdmit patientAdmit) {
+		patientAdmitRepository.save(patientAdmit);
+		
+	}
+
+	public void deletePatientAdmitById(int id) {
+		patientAdmitRepository.deleteById(id);
+		
+	}
 }
