@@ -17,9 +17,6 @@ public class DepartmentService {
 		departmentRepository.save(department);
 		
 	}
-	
-
-	
 
 	public List<Department> getAllDepartment() {
 		
@@ -32,11 +29,16 @@ public class DepartmentService {
 		
 	}
 
-	public Optional<Department> deleteDepartmentById(int id) {
-		Optional<Department> optional=departmentRepository.findById(id);
-        return optional;
+	public void deleteDepartmentById(int id) {
+	 departmentRepository.deleteById(id);
+        
 		
 	
+	}
+
+	public void updateDepartmentById(Department department) {
+	departmentRepository.save(department);
+		
 	}
 
 	
