@@ -29,10 +29,14 @@ public class PatientService {
 	        return optional;
 		}
 
-		public Optional<Patient> getdeletePatientById(int id) {
-			Optional<Patient> optional=patientRepository.findById(id);
-	        return optional;
+		
 			
+
+		public void deletePatientById(int id) {
+			patientRepository.deleteById(id);
+		}
+		public void updatePatientById(Patient patient) {
+			patientRepository.save(patient);
 		}
 		
 		

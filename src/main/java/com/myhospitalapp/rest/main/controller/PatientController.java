@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
-import com.myhospitalapp.rest.main.model.HospitalStaff;
 import com.myhospitalapp.rest.main.model.Patient;
 import com.myhospitalapp.rest.main.service.PatientService;
 
@@ -31,7 +31,7 @@ public class PatientController {
 		return ResponseEntity.status(HttpStatus.OK).body("Patient posted.");
 	}
 	
-	@GetMapping("/all")
+	@GetMapping("/ getall")
 	public List<Patient> getAllPatients() {
 		List<Patient> list = patientService.getAllPatients();
 		return list;
@@ -49,20 +49,24 @@ public class PatientController {
 		return ResponseEntity.status(HttpStatus.OK).body(patient);
 	}
 	
-	@DeleteMapping("/two/{id}")
-	public ResponseEntity<Object> deletePatientById(@PathVariable("id")int id){
-		Optional<Patient> optional = patientService.getdeletePatientById(id);
-		if(!optional.isPresent()) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid ID Given");
+	@DeleteMapping("/delete/{id}")
+	public ResponseEntity<String> deletePatientById(@PathVariable("id")int id){
+		patientService.deletePatientById(id);
+			return ResponseEntity.status(HttpStatus.OK).body("Patient is deleted");
 		}
-		Patient patient = optional.get();
-	    return ResponseEntity.status(HttpStatus.OK).body("Deleted successfully");
-		
+	@PutMapping("/update/{id}")
+	public ResponseEntity<String> updatePatientById(@PathVariable("id")int id,@RequestBody Patient patient) {
+		patientService.updatePatientById(patient);	
+		return ResponseEntity.status(HttpStatus.OK).body("Patient is updated");
 	}
-	
-
-	
-
 }
+	
+	
+	
+		
+	
+
+	
+
 
 
