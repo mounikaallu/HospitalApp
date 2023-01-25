@@ -19,6 +19,7 @@ public class PatientDoctor {
      private Doctor doctor;
      @OneToOne
      private HospitalStaff hospitalStaff;
+     
      private String appointmentDate;
      private String appointmentTime;
 	public int getId() {
