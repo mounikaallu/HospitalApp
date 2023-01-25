@@ -1,10 +1,16 @@
 package com.myhospitalapp.rest.main.controller;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,30 +37,60 @@ public class PatientDoctorContoller {
 								@PathVariable("doctorId") int doctorId, 
 								@RequestBody PatientDoctor patientDoctor) {
 		
-		/* Validate patientId, fetch Patient Object */
+		
 		java.util.Optional<Patient> optionalP =  patientService.getPatientById(patientId);
 	
 		if(!optionalP.isPresent())
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid Patient ID");
 		
-		/* Validate doctorId, fetch Doctor Object*/
+		
 		java.util.Optional<Doctor> optionalD = doctorService.getDoctorById(doctorId);
 		
 		if(!optionalD.isPresent())
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid Doctor Id");
 		
-		//fetch patient and doctor object from optional
+	
 		Patient patient = optionalP.get();
 		Doctor doctor = optionalD.get();
 		
-		/* set these patient and doctor objects to patientDoctor object */
+	
 		patientDoctor.setDoctor(doctor);
 		patientDoctor.setPatient(patient);
 		
-		/* save patientDoctor object in DB */
+		
 		patientDoctorService.insert(patientDoctor);
 		
 		return ResponseEntity.status(HttpStatus.OK).body("Appointment confirmed");
 	}
+	
+	@GetMapping("/getall")
+	public List<PatientDoctor> getAllPatientDoctor() {
+		List<PatientDoctor> list =patientDoctorService.getAllPatientDoctor();
+		return list;
+	}
+	
+	@GetMapping("/one/{id}")
+	public ResponseEntity<Object> getPatientDoctorById(@PathVariable("id")int id) {
+		Optional<PatientDoctor> optional =patientDoctorService.getPatientDoctorById(id);
+		if(!optional.isPresent()) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid ID Given");
+		}
+		PatientDoctor patientDoctor = optional.get();
+		return ResponseEntity.status(HttpStatus.OK).body(patientDoctor);
+		}
+	
+	@PutMapping("/update/{id}")
+    public ResponseEntity<String> updatePatientDoctorById(@PathVariable("id") int id,
+                           @RequestBody PatientDoctor patientDoctor) {
+	  patientDoctorService.updatePatientDoctorById(patientDoctor);
+	  return ResponseEntity.status(HttpStatus.OK).body("PatientDoctor is updated....");
+ }
+	
+	@DeleteMapping("/delete/{id}")
+	public ResponseEntity<String> deletePatientDoctorById(@PathVariable("id") int id){
+	    patientDoctorService.deletePatientDoctorById(id);
+	    
+	    return ResponseEntity.status(HttpStatus.OK).body("PatientDoctor is deleted");
+  }
 	
 }
