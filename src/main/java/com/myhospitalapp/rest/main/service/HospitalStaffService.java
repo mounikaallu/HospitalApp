@@ -15,6 +15,8 @@ public class HospitalStaffService {
 	
 	@Autowired
 	private HospitalStaffRepository hospitalStaffRepository; 
+	
+	
 
 	public void insertHospitalStaff(HospitalStaff hospitalStaff) {
 		hospitalStaffRepository.save(hospitalStaff);
@@ -32,14 +34,20 @@ public class HospitalStaffService {
 		
 	}
 
-	public Optional<HospitalStaff> deleteHospitalStaffById(int id) {
-		Optional<HospitalStaff> optional=hospitalStaffRepository.findById(id);
-        return optional;
+	public void updateHospitalstaffById(HospitalStaff hospitalStaff) {
+		hospitalStaffRepository.save(hospitalStaff);
+	}
+
+	public void deleteHospitalStaffById(int id) {
+		hospitalStaffRepository.deleteById(id);
 		
+	}
+
+	
 		
 	}
 
 	
 
 	
-}
+

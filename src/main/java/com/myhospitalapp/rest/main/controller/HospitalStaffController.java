@@ -15,48 +15,52 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import com.myhospitalapp.rest.main.model.HospitalStaff;
 import com.myhospitalapp.rest.main.service.HospitalStaffService;
 
 @RestController
-@RequestMapping("/api/HospitalStaff")
+@RequestMapping("/api/hospitalStaff")
 public class HospitalStaffController {
-	
+
 	@Autowired
 	private HospitalStaffService hospitalStaffService;
-	
+
 	@PostMapping("/add")
-	public ResponseEntity<String> postHospitalStaff(@RequestBody HospitalStaff hospitalStaff){
+	public ResponseEntity<String> postHospitalStaff(@RequestBody HospitalStaff hospitalStaff) {
 		hospitalStaffService.insertHospitalStaff(hospitalStaff);
-		return ResponseEntity.status(HttpStatus.OK).body("Course posted in DB");
+		return ResponseEntity.status(HttpStatus.OK).body("HospitalStaff posted in DB");
 	}
+
 	@GetMapping("/getall")
 	public List<HospitalStaff> getAllHospitalStaff() {
-		List<HospitalStaff> list =hospitalStaffService.getAllHospitalStaff();
+		List<HospitalStaff> list = hospitalStaffService.getAllHospitalStaff();
 		return list;
 	}
+
 	@GetMapping("/one/{id}")
-	public ResponseEntity<Object> getHospitalStaffById(@PathVariable("id")int id) {
-		Optional<HospitalStaff> optional =hospitalStaffService.getHospitalStaffById(id);
-		if(!optional.isPresent()) {
+	public ResponseEntity<Object> getHospitalStaffById(@PathVariable("id") int id) {
+		Optional<HospitalStaff> optional = hospitalStaffService.getHospitalStaffById(id);
+		if (!optional.isPresent()) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid ID Given");
 		}
 		HospitalStaff hospitalStaff = optional.get();
 		return ResponseEntity.status(HttpStatus.OK).body(hospitalStaff);
-		}
-	@DeleteMapping("/two/{id}")
-	public ResponseEntity<Object> deleteHospitalStaffById(@PathVariable("id")int id){
-		Optional<HospitalStaff> optional = hospitalStaffService.deleteHospitalStaffById(id);
-		if(!optional.isPresent()) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid ID Given");
-		}
-		HospitalStaff hospitalStaff = optional.get();
-	    return ResponseEntity.status(HttpStatus.OK).body("Deleted successfully");
-		
 	}
-	//@PutMapping("/three/{id}")
+
 	
+	@DeleteMapping("/delete/{id}")
+	 public ResponseEntity<String> deleteHospitalStaffById(@PathVariable("id") int id){
+		hospitalStaffService.deleteHospitalStaffById(id);
+		 return ResponseEntity.status(HttpStatus.OK).body("Hospital Staff is deleted");
+	}
 	
+
+	@PutMapping("/update/{id}")
+	public ResponseEntity<String> updateHospitalStaffById(@PathVariable("id") int id,
+			@RequestBody HospitalStaff hospitalStaff) {
+		hospitalStaffService.updateHospitalstaffById(hospitalStaff);
+		return ResponseEntity.status(HttpStatus.OK).body("hospitalstaff is updated....");
+
+	}
 
 }

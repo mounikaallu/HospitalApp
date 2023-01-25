@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bootapp.rest.restapp.model.Employee;
+
 import com.myhospitalapp.rest.main.model.HospitalStaff;
 import com.myhospitalapp.rest.main.model.Patient;
 import com.myhospitalapp.rest.main.service.PatientService;
