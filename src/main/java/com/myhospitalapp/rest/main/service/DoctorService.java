@@ -33,10 +33,14 @@ public class DoctorService {
 		
 	}
 
-	public Optional<Doctor> deleteDoctorById(int id) {
-		Optional<Doctor> optional=doctorRepository.findById(id);
-        return optional;
+	public void deleteDoctorById(int id) {
+		doctorRepository.deleteById(id);
 		
+		
+	}
+
+	public void updateDoctorById(Doctor doctor) {
+		doctorRepository.save(doctor);
 		
 	}
 
