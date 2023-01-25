@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bootapp.rest.restapp.model.Employee;
 import com.myhospitalapp.rest.main.model.HospitalStaff;
 import com.myhospitalapp.rest.main.model.Patient;
 import com.myhospitalapp.rest.main.repository.PatientRepository;
@@ -35,17 +34,7 @@ public class PatientService {
 	        return optional;
 			
 		}
-		// method for get patient by department specialization
-
-//		public List<Patient> getPatientByDoctorSpecilization(int did) {
-//			// TODO Auto-generated method stub
-//			List<Patient> list = patientRepository.findAll();
-//			List<Patient> filteredList=list.stream().filter(e->e.get().getId()==did)
-//			             .collect(Collectors.toList());
-//			return filteredList;
-//			
-//		}
-
+		
 		
 	}
 

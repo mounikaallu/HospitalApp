@@ -59,13 +59,7 @@ public class PatientController {
 	    return ResponseEntity.status(HttpStatus.OK).body("Deleted successfully");
 		
 	}
-	/*Get patient by doctor specialization*/
-//	@GetMapping("/department/{did}")
-//	
-//	  public List<Patient> showPatientByDoctorSpecialization(@PathVariable("did") int did ){
-//		List<Patient> list = patientService.getPatientByDoctorSpecilization(did);
-//		return list;
-//	}
+	
 
 	
 
