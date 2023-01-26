@@ -27,7 +27,7 @@ public class PatientAdmit {
 	}
 	@OneToOne
     private Patient patient;
-    @ManyToOne
+    @OneToOne
     private Department department;
     @OneToOne
     private Doctor doctor;
