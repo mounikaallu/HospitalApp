@@ -3,6 +3,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 @Entity
 public class PatientAdmit {
@@ -26,7 +27,7 @@ public class PatientAdmit {
 	}
 	@OneToOne
     private Patient patient;
-    @OneToOne
+    @ManyToOne
     private Department department;
     @OneToOne
     private Doctor doctor;

@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.myhospitalapp.rest.main.model.Department;
 import com.myhospitalapp.rest.main.model.Doctor;
+import com.myhospitalapp.rest.main.model.PatientAdmit;
 import com.myhospitalapp.rest.main.service.DepartmentService;
 import com.myhospitalapp.rest.main.service.DoctorService;
 
@@ -55,13 +57,6 @@ public class DoctorController {
 		return ResponseEntity.status(HttpStatus.OK).body("Doctor is deleted");
 		
 	}
-	@PutMapping("/update/{id}")
-	public ResponseEntity<String> updateDoctorById(@PathVariable("id") int id,
-			@RequestBody Doctor doctor) {
-		doctorService.updateDoctorById(doctor);
-		return ResponseEntity.status(HttpStatus.OK).body("Doctor is updated");
-		
-	}
- 
-
+	
+	
 }
