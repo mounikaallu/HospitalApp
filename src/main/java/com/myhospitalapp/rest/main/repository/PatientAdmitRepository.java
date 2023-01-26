@@ -8,6 +8,6 @@ import com.myhospitalapp.rest.main.model.PatientAdmit;
 
 public interface PatientAdmitRepository extends JpaRepository<PatientAdmit, Integer> {
 
-	List<PatientAdmit> getByDept(int depid);
+	
 
 }

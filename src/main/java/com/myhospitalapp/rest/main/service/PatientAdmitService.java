@@ -41,8 +41,5 @@ public class PatientAdmitService {
 		
 	}
 
-	public List<PatientAdmit> getAdmittedPatientByDeptId(int depid) {
-		
-		return patientAdmitRepository.getByDept(depid);
-	}
+	
 }

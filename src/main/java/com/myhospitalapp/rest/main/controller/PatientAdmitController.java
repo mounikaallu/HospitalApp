@@ -92,22 +92,6 @@ public class PatientAdmitController {
 	
 		return ResponseEntity.status(HttpStatus.OK).body("Admitted patient is deleted");
 	}
-	// getting admitted patient details by department id
-		@PostMapping("/add/{depid}")
-		public ResponseEntity<String> postAdmittedPatient(@RequestBody PatientAdmit patientAdmit, 
-				@PathVariable("depid")int depid){
-			System.out.println("Post Admitted Patients");
-			Optional<Department> department = departmentService.getDepartmentById(depid);
-			
-			patientAdmit.setDepartment(department.get());
-			patientAdmitService.postAdmittedPatient(patientAdmit);
-			return ResponseEntity.status(HttpStatus.OK).body("Admitted Patient Posted");
-			
-			
-			}
-		@GetMapping("/bydepartmentid/{depid}")
-		public List<PatientAdmit> getadmittedPatientByDeptId(@PathVariable ("depid") int depid){
-			return patientAdmitService.getAdmittedPatientByDeptId(depid);
-		}
+	
 
 }
