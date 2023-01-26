@@ -10,6 +10,7 @@ import javax.persistence.Id;
 
 
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import com.myhospitalapp.rest.main.enums.Specialization;
 
@@ -21,7 +22,22 @@ public class Doctor {
 	private int id;
 	@ManyToOne
 	private Department department;
+	
+	@OneToOne
+	private User user;
 
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public void setSpecialization(Specialization specialization) {
+		this.specialization = specialization;
+	}
 
 	public Department getDepartment() {
 		return department;

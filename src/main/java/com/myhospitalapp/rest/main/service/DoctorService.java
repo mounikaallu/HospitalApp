@@ -41,5 +41,15 @@ public class DoctorService {
 
 	
 
+	public void postDoctor(Doctor doctor) {
+		doctorRepository.save(doctor);
+		
+	}
+
+	public List<Doctor> getDoctorByDepartmentId(int depId) {
+		return doctorRepository.getByDepartmentId(depId);
+		
+	}
+
 }
 
