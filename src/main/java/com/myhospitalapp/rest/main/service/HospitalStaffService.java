@@ -16,36 +16,32 @@ public class HospitalStaffService {
 	@Autowired
 	private HospitalStaffRepository hospitalStaffRepository; 
 	
-	
-
 	public void insertHospitalStaff(HospitalStaff hospitalStaff) {
 		hospitalStaffRepository.save(hospitalStaff);
 		
 	}
-
-	public List<HospitalStaff> getAllHospitalStaff() {
+    public List<HospitalStaff> getAllHospitalStaff() {
 		return hospitalStaffRepository.findAll();
 		
 	}
-
-	public Optional<HospitalStaff> getHospitalStaffById(int id) {
+    public Optional<HospitalStaff> getHospitalStaffById(int id) {
 		Optional<HospitalStaff> optional=hospitalStaffRepository.findById(id);
         return optional;
-		
 	}
-
-	public void updateHospitalstaffById(HospitalStaff hospitalStaff) {
-		hospitalStaffRepository.save(hospitalStaff);
-	}
-
-	public void deleteHospitalStaffById(int id) {
+    public void deleteHospitalStaffById(int id) {
 		hospitalStaffRepository.deleteById(id);
 		
 	}
 
-	
+	public void PostHospitalStaff(HospitalStaff hsDB) {
+		hospitalStaffRepository.save(hsDB);
 		
 	}
+}
+
+	
+		
+	
 
 	
 

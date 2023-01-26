@@ -38,7 +38,7 @@ public class PatientDoctorContoller {
 								@RequestBody PatientDoctor patientDoctor) {
 		
 		
-		java.util.Optional<Patient> optionalP =  patientService.getPatientById(patientId);
+		Optional<Patient> optionalP =  patientService.getPatientById(patientId);
 	
 		if(!optionalP.isPresent())
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid Patient ID");
@@ -79,12 +79,7 @@ public class PatientDoctorContoller {
 		return ResponseEntity.status(HttpStatus.OK).body(patientDoctor);
 		}
 	
-	@PutMapping("/update/{id}")
-    public ResponseEntity<String> updatePatientDoctorById(@PathVariable("id") int id,
-                           @RequestBody PatientDoctor patientDoctor) {
-	  patientDoctorService.updatePatientDoctorById(patientDoctor);
-	  return ResponseEntity.status(HttpStatus.OK).body("PatientDoctor is updated....");
- }
+	
 	
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<String> deletePatientDoctorById(@PathVariable("id") int id){

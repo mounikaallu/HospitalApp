@@ -29,13 +29,17 @@ public class PatientAdmitService {
 		return optional;
 	}
 
-	public void updatePatientAdmitById(PatientAdmit patientAdmit) {
-		patientAdmitRepository.save(patientAdmit);
-		
-	}
+	
 
 	public void deletePatientAdmitById(int id) {
 		patientAdmitRepository.deleteById(id);
 		
 	}
+
+	public void postAdmittedPatient(PatientAdmit patientAdmit) {
+		patientAdmitRepository.save(patientAdmit);
+		
+	}
+
+	
 }

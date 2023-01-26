@@ -54,11 +54,8 @@ public class PatientController {
 		patientService.deletePatientById(id);
 			return ResponseEntity.status(HttpStatus.OK).body("Patient is deleted");
 		}
-	@PutMapping("/update/{id}")
-	public ResponseEntity<String> updatePatientById(@PathVariable("id")int id,@RequestBody Patient patient) {
-		patientService.updatePatientById(patient);	
-		return ResponseEntity.status(HttpStatus.OK).body("Patient is updated");
-	}
+	
+	
 }
 	
 	

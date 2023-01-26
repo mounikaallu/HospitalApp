@@ -39,10 +39,7 @@ public class DoctorService {
 		
 	}
 
-	public void updateDoctorById(Doctor doctor) {
-		doctorRepository.save(doctor);
-		
-	}
+	
 
 }
 

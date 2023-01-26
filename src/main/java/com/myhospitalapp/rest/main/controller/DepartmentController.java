@@ -52,10 +52,6 @@ return list;
 	    return ResponseEntity.status(HttpStatus.OK).body("Department Deleted successfully");
 		
 	}
-	@PutMapping("/update/{id}")
-	public ResponseEntity<String> updateDepartmentById(@PathVariable("id") int id,@RequestBody Department department){
-		departmentService.updateDepartmentById(department);
-		return ResponseEntity.status(HttpStatus.OK).body("Department is Updated....");
-	}
+	
 	
 }

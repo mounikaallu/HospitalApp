@@ -83,12 +83,7 @@ public class PatientAdmitController {
 		PatientAdmit patientAdmit = optional.get();
 		return ResponseEntity.status(HttpStatus.OK).body(patientAdmit);
 		}
-	@PutMapping("/update/{id}")
-	 public ResponseEntity<String> updatePatientAdmitById(@PathVariable("id") int id,
-	@RequestBody PatientAdmit patientAdmit) {
-		patientAdmitService.updatePatientAdmitById(patientAdmit);
-	return ResponseEntity.status(HttpStatus.OK).body("PatientAdmit is updated....");
-	}
+	
 
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<String> deletePatientAdmitById(@PathVariable("id") int id){
@@ -97,5 +92,6 @@ public class PatientAdmitController {
 	
 		return ResponseEntity.status(HttpStatus.OK).body("Admitted patient is deleted");
 	}
+	
 
 }
