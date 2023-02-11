@@ -42,7 +42,7 @@ public class DoctorService {
 	
 
 	public void postDoctor(Doctor doctor) {
-		doctorRepository.save(doctor);
+	doctorRepository.save(doctor);
 		
 	}
 

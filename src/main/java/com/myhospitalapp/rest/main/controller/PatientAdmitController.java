@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import org.springframework.web.bind.annotation.RestController;
 
 import com.myhospitalapp.rest.main.model.Department;
@@ -20,6 +21,7 @@ import com.myhospitalapp.rest.main.model.Doctor;
 
 import com.myhospitalapp.rest.main.model.Patient;
 import com.myhospitalapp.rest.main.model.PatientAdmit;
+
 import com.myhospitalapp.rest.main.service.DepartmentService;
 import com.myhospitalapp.rest.main.service.DoctorService;
 import com.myhospitalapp.rest.main.service.PatientAdmitService;
@@ -37,6 +39,8 @@ public class PatientAdmitController {
 	private DoctorService doctorService;
 	@Autowired
 	private PatientAdmitService patientAdmitService;
+	
+	
 
 	@PostMapping("/patient/department/doctor/add/{patientId}/{departmentId}/{doctorId}")
 	public ResponseEntity<String> assignInstructorToCourse(@RequestBody PatientAdmit patientAdmit,
@@ -69,29 +73,50 @@ public class PatientAdmitController {
 		return ResponseEntity.status(HttpStatus.OK).body("PatientAdmitted..");
 
 	}
+
 	@GetMapping("/getall")
 	public List<PatientAdmit> getAllPatientAdmit() {
-		List<PatientAdmit> list =patientAdmitService.getAllPatientAdmit();
+		List<PatientAdmit> list = patientAdmitService.getAllPatientAdmit();
 		return list;
 	}
+
 	@GetMapping("/one/{id}")
-	public ResponseEntity<Object> getPatientAdmitById(@PathVariable("id")int id) {
-		Optional<PatientAdmit> optional =patientAdmitService.getPatientAdmitById(id);
-		if(!optional.isPresent()) {
+	public ResponseEntity<Object> getPatientAdmitById(@PathVariable("id") int id) {
+		Optional<PatientAdmit> optional = patientAdmitService.getPatientAdmitById(id);
+		if (!optional.isPresent()) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid ID Given");
 		}
 		PatientAdmit patientAdmit = optional.get();
 		return ResponseEntity.status(HttpStatus.OK).body(patientAdmit);
+	}
+
+	@PutMapping("/edit/{paid}")
+	public ResponseEntity<String> editAdmittedPatient(@PathVariable("paid") int paid, @RequestBody PatientAdmit paNew) {
+		/* Step 1: check if this id given is valid by fetching the record from DB */
+		Optional<PatientAdmit> optional = patientAdmitService.getPatientAdmitById(paid);
+
+		if (!optional.isPresent()) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("invalid ID");
 		}
-	
+
+		PatientAdmit paDB = optional.get();
+
+		/* Step 2: Set New value to DB value */
+		if (paNew.getBedNo() != 0)
+			paDB.setBedNo(paNew.getBedNo());
+
+		/* Save updated employeeDB value in DB */
+		patientAdmitService.postPatientAdmit(paDB);
+		return ResponseEntity.status(HttpStatus.OK).body("Admitted Patient record Edited..");
+
+	}
 
 	@DeleteMapping("/delete/{id}")
-	public ResponseEntity<String> deletePatientAdmitById(@PathVariable("id") int id){
-		
+	public ResponseEntity<String> deletePatientAdmitById(@PathVariable("id") int id) {
+
 		patientAdmitService.deletePatientAdmitById(id);
-	
+
 		return ResponseEntity.status(HttpStatus.OK).body("Admitted patient is deleted");
 	}
-	
 
 }

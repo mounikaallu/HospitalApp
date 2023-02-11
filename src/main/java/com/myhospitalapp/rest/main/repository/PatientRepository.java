@@ -16,5 +16,7 @@ public interface PatientRepository extends JpaRepository<Patient, Integer>{
 
 	
 
+	
+
 
 }

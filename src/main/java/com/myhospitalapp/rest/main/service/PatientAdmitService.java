@@ -14,6 +14,8 @@ public class PatientAdmitService {
 
 	@Autowired
     private PatientAdmitRepository patientAdmitRepository;
+	
+	
 
     public void insert(PatientAdmit patientAdmit) {
     	patientAdmitRepository.save(patientAdmit);
@@ -36,10 +38,13 @@ public class PatientAdmitService {
 		
 	}
 
-	public void postAdmittedPatient(PatientAdmit patientAdmit) {
-		patientAdmitRepository.save(patientAdmit);
+	
+
+	public void postPatientAdmit(PatientAdmit paDB) {
 		
+		patientAdmitRepository.save(paDB);
 	}
+
 
 	
 }

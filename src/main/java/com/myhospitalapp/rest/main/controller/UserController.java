@@ -27,7 +27,7 @@ public class UserController {
 	@PostMapping("/sign-up")
 	public ResponseEntity<String> signUp(@RequestBody User user) {
 
-		//Check username uniqueness
+		//Check user name uniqueness
 		User userDB = userRepository.getUserByUsername(user.getUsername());
 		if(!(userDB == null)) {
 			return ResponseEntity.status(HttpStatus.CONFLICT).body("Username already present");

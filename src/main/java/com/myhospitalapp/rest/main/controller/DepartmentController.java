@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.myhospitalapp.rest.main.model.Department;
-import com.myhospitalapp.rest.main.model.HospitalStaff;
 import com.myhospitalapp.rest.main.service.DepartmentService;
 
 @RestController
@@ -52,6 +51,28 @@ return list;
 	    return ResponseEntity.status(HttpStatus.OK).body("Department Deleted successfully");
 		
 	}
-	
+
+	@PutMapping("/edit/{did}")
+	public ResponseEntity<String> editDepartment(@PathVariable("did") int did, 
+							@RequestBody Department departmentNew) {
+		/* Step 1: check if this id given is valid by fetching the record from DB */
+		Optional<Department> optional = departmentService.getDepartmentById(did);
+
+		if(!optional.isPresent()) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("invalid ID");
+		}
+
+		Department departmentDB = optional.get(); //User given employee value
+
+		/* Step 2: Set New value to DB value */
+		if(departmentNew.getSpecialization() != null)
+			departmentDB.setSpecialization(departmentNew.getSpecialization());
+		
+
+		/* Save updated employeeDB value in DB */
+		departmentService.postEmployee(departmentDB);
+		return ResponseEntity.status(HttpStatus.OK).body("Department record Edited..");
+
+	}
 	
 }
