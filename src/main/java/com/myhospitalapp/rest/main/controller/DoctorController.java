@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.myhospitalapp.rest.main.model.Department;
 import com.myhospitalapp.rest.main.model.Doctor;
-import com.myhospitalapp.rest.main.model.Patient;
 import com.myhospitalapp.rest.main.model.User;
 import com.myhospitalapp.rest.main.repository.UserRepository;
 import com.myhospitalapp.rest.main.service.DepartmentService;
@@ -59,52 +58,67 @@ public class DoctorController {
 		Doctor doctor = optional.get();
 		return ResponseEntity.status(HttpStatus.OK).body(doctor);
 	}
+
 	@DeleteMapping("/delete/{id}")
-	 public ResponseEntity<String> deleteDoctorById(@PathVariable("id") int id){
+	public ResponseEntity<String> deleteDoctorById(@PathVariable("id") int id) {
 		doctorService.deleteDoctorById(id);
 		return ResponseEntity.status(HttpStatus.OK).body("Doctor is deleted");
-		
+
 	}
-	
+
+	@PutMapping("/edit/{did}")
+	public ResponseEntity<String> editDoctor(@PathVariable("did") int did, @RequestBody Doctor doctorNew) {
+
+		Optional<Doctor> optional = doctorService.getDoctorById(did);
+		if (!optional.isPresent()) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("invalid ID");
+		}
+		Doctor doctorDB = optional.get(); // User given employee value  
+
+		if (doctorNew.getName() != null)
+			doctorDB.setName(doctorNew.getName());
+		if (doctorNew.getContactNo() != null)
+			doctorDB.setContactNo(doctorNew.getContactNo());
+		if (doctorNew.getSpecialization() != null)
+			doctorDB.setSpecialization(doctorNew.getSpecialization());
+		doctorService.postDoctor(doctorDB);
+		return ResponseEntity.status(HttpStatus.OK).body("Doctor Record Edited");
+	}
+
 	@PostMapping("/add/{depid}")
-	public ResponseEntity<String> postDoctor(@RequestBody Doctor doctor, 
-							 @PathVariable("depid") int depid) {
-		
-		//Fetch User info from employee input and save it in DB 
-				User user = doctor.getUser(); //I have username and password 
-				//I will assign the role
-				user.setRole("DOCTOR");
+	public ResponseEntity<String> postDoctor(@RequestBody Doctor doctor, @PathVariable("depid") int depid) {
 
-				//Converting plain text password into encoded text
-				String encodedPassword = passwordEncoder.encode(user.getPassword());
-				//attach encoded password to user
-				user.setPassword(encodedPassword);
+		// Fetch User info from doctor input and save it in DB
+		User user = doctor.getUser(); // I have user name and password
+		// I will assign the role
+		user.setRole("DOCTOR");
 
-				user  = userRepository.save(user);
+		// Converting plain text password into encoded text
+		String encodedPassword = passwordEncoder.encode(user.getPassword());
+		// attach encoded password to user
+		user.setPassword(encodedPassword);
 
+		user = userRepository.save(user);
 
-				//Attach user object to employee
-				doctor.setUser(user);
-		//Fetch Department Object based on depid.
-		System.out.println("post employe");
+		// Attach user object to doctor
+		doctor.setUser(user);
+		// Fetch Department Object based on depid.
+		System.out.println("post doctor");
 		Optional<Department> department = departmentService.getDepartmentById(depid);
 
-		//Attach department object to employee
+		// Attach department object to doctor
 		doctor.setDepartment(department.get());
 
-
-		//save the employee object
+		// save the doctor object
 		doctorService.postDoctor(doctor);
-		return ResponseEntity.status(HttpStatus.OK).body("Patient posted");
-
+		return ResponseEntity.status(HttpStatus.OK).body("doctor Appointed");
 
 	}
+
 	@GetMapping("/bydepartmentid/{did}")
-	public List<Doctor> getDoctorByDepartmentId(@PathVariable ("did") String depid) {
+	public List<Doctor> getDoctorByDepartmentId(@PathVariable("did") String depid) {
 		return doctorService.getDoctorByDepartmentId(Integer.parseInt(depid));
-		
+
 	}
-	
- 
 
 }

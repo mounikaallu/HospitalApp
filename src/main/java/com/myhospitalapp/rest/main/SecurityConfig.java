@@ -30,7 +30,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.antMatchers(HttpMethod.GET,"/api/user/login").authenticated()
 		.antMatchers(HttpMethod.GET, "/api/user/hello").permitAll()
 		.antMatchers(HttpMethod.GET, "/api/user/private/hello").authenticated()
-		.antMatchers(HttpMethod.GET, "/api/user/private/role/hello").hasAnyAuthority("AIRLINE")
+		.antMatchers(HttpMethod.GET, "/api/doctor/bydepartmentid/{did}").hasAnyAuthority("DOCTOR")
+		.antMatchers(HttpMethod.GET, "/api/patient/bydoctorid/{did}").hasAnyAuthority("PATIENT")
+		
 		.anyRequest().permitAll()
 		.and().httpBasic()
 		.and().csrf().disable();

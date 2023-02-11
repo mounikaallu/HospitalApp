@@ -35,5 +35,10 @@ public class PatientDoctorService {
 		
 	}
 
+	public void postPatientDoctor(PatientDoctor patientDoctorDB) {
+		 patientDoctorRepository.save(patientDoctorDB);
+		
+	}
+
 
 }

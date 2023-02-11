@@ -37,6 +37,11 @@ public class DepartmentService {
 	
 	}
 
+	public void postEmployee(Department departmentDB) {
+		departmentRepository.save(departmentDB);
+		
+	}
+
 	
 	
 
