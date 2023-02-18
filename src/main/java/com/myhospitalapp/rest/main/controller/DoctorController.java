@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,13 +17,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.myhospitalapp.rest.main.dto.Message;
 import com.myhospitalapp.rest.main.model.Department;
 import com.myhospitalapp.rest.main.model.Doctor;
 import com.myhospitalapp.rest.main.model.User;
 import com.myhospitalapp.rest.main.repository.UserRepository;
 import com.myhospitalapp.rest.main.service.DepartmentService;
 import com.myhospitalapp.rest.main.service.DoctorService;
-
+@CrossOrigin(origins = {"*"})
 @RestController
 @RequestMapping("/api/doctor")
 public class DoctorController {
@@ -38,10 +40,19 @@ public class DoctorController {
 	private PasswordEncoder passwordEncoder;
 
 	@PostMapping("/add")
-	public ResponseEntity<String> postDoctor(@RequestBody Doctor doctor) {
-		doctorService.insertDoctor(doctor);
-		return ResponseEntity.status(HttpStatus.OK).body("Doctor Posted in DB");
-	}
+	public ResponseEntity<Message> postDoctor(@RequestBody Doctor doctor) {
+		Message m = new Message();
+		try {
+			doctorService.postDoctor(doctor);
+			m.setMsg("Doctor added");
+			return ResponseEntity.status(HttpStatus.OK).body(m);
+		}
+		catch(Exception e) {
+			m.setMsg("Could not process the request, Try Again");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(m);
+		}
+			
+		}
 
 	@GetMapping("/getall")
 	public List<Doctor> getAllDoctor() {

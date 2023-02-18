@@ -17,7 +17,7 @@ public class PatientService {
 		@Autowired
 		private PatientRepository patientRepository;
 
-		public void insert(Patient patient) {
+		public void insertPatient(Patient patient) {
 			patientRepository.save(patient);	
 		}
 

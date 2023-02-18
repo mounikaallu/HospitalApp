@@ -25,7 +25,7 @@ public class Department {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Specialization getSpecialization() {
+	public Specialization getSpecialization(){
 		return specialization;
 	}
 	public void setSpecialization(Specialization specialization) {

@@ -17,7 +17,7 @@ public class DoctorService {
 	@Autowired
 	private DoctorRepository doctorRepository; 
 
-	public void insertDoctor(Doctor doctor) {
+	public void postDoctor(Doctor doctor) {
 		doctorRepository.save(doctor);
 		
 	}
@@ -35,15 +35,7 @@ public class DoctorService {
 
 	public void deleteDoctorById(int id) {
 		doctorRepository.deleteById(id);
-		
-		
-	}
-
-	
-
-	public void postDoctor(Doctor doctor) {
-	doctorRepository.save(doctor);
-		
+				
 	}
 
 	public List<Doctor> getDoctorByDepartmentId(int depId) {

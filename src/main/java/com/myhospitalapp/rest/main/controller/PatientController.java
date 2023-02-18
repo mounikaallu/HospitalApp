@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.myhospitalapp.rest.main.dto.Message;
 import com.myhospitalapp.rest.main.model.Doctor;
 import com.myhospitalapp.rest.main.model.Patient;
 import com.myhospitalapp.rest.main.model.User;
@@ -25,6 +27,7 @@ import com.myhospitalapp.rest.main.service.DoctorService;
 import com.myhospitalapp.rest.main.service.PatientService;
 
 @RestController
+@CrossOrigin(origins = {"*"})
 @RequestMapping("/api/patient")
 public class PatientController {
 	@Autowired
@@ -40,9 +43,22 @@ public class PatientController {
 	private PasswordEncoder passwordEncoder;
 
 	@PostMapping("/add")
-	public ResponseEntity<String> postPatient(@RequestBody Patient patient) {
-		patientService.insert(patient);
-		return ResponseEntity.status(HttpStatus.OK).body("Patient posted.");
+	public ResponseEntity<Message> postPatient(@RequestBody Patient patient) {
+		Message m= new Message();
+		try {
+			patientService.insertPatient(patient);
+			m.setMsg("Patient added");
+			return ResponseEntity.status(HttpStatus.OK).body(m);
+		}
+		catch(Exception e) {
+			m.setMsg("Could not process the request, Try Again");
+			return ResponseEntity.status(HttpStatus.PROCESSING).body(m);
+		
+		}
+			
+	
+	
+		
 	}
 
 	@GetMapping("/getall")

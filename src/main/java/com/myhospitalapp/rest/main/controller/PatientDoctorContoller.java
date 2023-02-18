@@ -25,7 +25,7 @@ import com.myhospitalapp.rest.main.service.PatientDoctorService;
 import com.myhospitalapp.rest.main.service.PatientService;
 
 @RestController
-@RequestMapping("/api/patient/doctor")
+@RequestMapping("/api/patient/doctor/hospitalstaff")
 public class PatientDoctorContoller {
 	@Autowired
 	private PatientService patientService;
